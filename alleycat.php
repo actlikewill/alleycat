@@ -1,7 +1,7 @@
 <?php
-/*
+/**
 * @package AlleyCat
-/
+*/
 /*
 Plugin Name: AlleyCat
 Plugin URI: http://alleycat.com
@@ -19,25 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class AlleyCat 
 {
-  function __construct() {
-    add_action( 'init', array( $this, 'custom_post_type' ) );
-  }
-
+  
   function register() {
-    add_action( 'wp_enqueue_scripts', array( $this, 'enqueue') );
+    add_action( 'admin_enqueue_scripts', array( $this, 'enqueue') );
   }
 
-  function activate() {
-    // Register Custom Posts
-    $this->custom_post_type();
-
-    // Flust Rewrite Rules
-    flush_rewrite_rules();
-  }
-
-  function deactivate() {
-    
-  }
   
   function uninstall() {
     
@@ -49,9 +35,20 @@ class AlleyCat
 
   function enqueue() {
     // Register scripts
-    wp_enqueue_script('AlleyCatStyles', plugins_url( '/assets/styles.css', __FILE__ ) );
+    wp_enqueue_style('AlleyCatStyles', plugins_url( '/assets/styles.css', __FILE__ ) );
     wp_enqueue_script('AlleyCatScripts', plugins_url( '/assets/scripts.js', __FILE__ ) );
   }
+
+  function activate() {
+    require_once plugin_dir_path(__FILE__). '/inc/alleycat-activate.php';
+    AlleyCatActivate::activate();
+  }
+
+  function deactivate() {
+    require_once plugin_dir_path(__FILE__). '/inc/alleycat-deactivate.php';
+    AlleyCatDectivate::deactivate();
+  }
+
 }
 
 if ( class_exists( 'AlleyCat' ) ) {

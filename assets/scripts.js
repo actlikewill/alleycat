@@ -1,1 +1,1 @@
-document.write('bla')
+console.log('alleycat is live')
