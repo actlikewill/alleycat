@@ -17,6 +17,7 @@
     {
         return [
             Pages\Admin::class,
+            Base\SettingsLinks::class,
             Base\Enqueue::class
         ];
     }
@@ -44,6 +45,6 @@
     {
         return new $class();
     }
-    
+
  }
 

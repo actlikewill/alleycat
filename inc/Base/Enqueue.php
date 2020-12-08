@@ -5,7 +5,7 @@
 
 namespace Inc\Base;
 
-class Enqueue
+class Enqueue extends \Inc\Base\BaseController
 {
 
     public function register() 
@@ -17,7 +17,7 @@ class Enqueue
      * Enqueue admin scripts
      */
     function enqueue() {        
-        wp_enqueue_style('AlleyCatStyles', PLUGIN_URL . 'assets/styles.css' );
-        wp_enqueue_script('AlleyCatScripts', PLUGIN_URL . 'assets/scripts.js' );
+        wp_enqueue_style('AlleyCatStyles', $this->plugin_url . 'assets/styles.css' );
+        wp_enqueue_script('AlleyCatScripts', $this->plugin_url . 'assets/scripts.js' );
         }
 }
