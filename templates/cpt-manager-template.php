@@ -1,0 +1,1 @@
+<h1>Custom Posts Manager</h1>
