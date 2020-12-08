@@ -3,10 +3,12 @@
 * @package AlleyCat
 */
 
+namespace Inc\Base;
 
-class AlleyCatActivate
+class Activate
 {
-    public static function activate() {
+    public static function activate() 
+    {
         echo 'ACTIVATING...';
         flush_rewrite_rules();
     }

@@ -1,0 +1,17 @@
+{
+    "name": "actlikewill/alleycat",
+    "description": "The AlleyCat Plugin",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "actlikewill",
+            "email": "wilsongaturu@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}
