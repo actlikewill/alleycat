@@ -1,15 +1,1 @@
-window.addEventListener( "load",  () => {  
-    const tabs = document.querySelectorAll("ul.nav-tabs > li");
-    const setListener = (tab) => {tab.addEventListener("click", switchTab)};
-    const switchTab = (event) => {
-            event.preventDefault();
-            document.querySelector("ul.nav-tabs li.active").classList.remove("active");   
-            document.querySelector(".tab-pane.active").classList.remove("active");       
-            const clickedTab = event.currentTarget;
-            const anchor = event.target;
-            const activePaneID = anchor.getAttribute("href");
-            clickedTab.classList.add("active");
-            document.querySelector(activePaneID).classList.add("active");
-            };
-    tabs.forEach(setListener);    
-}); 
+(()=>{var t={};t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(t){if("object"==typeof window)return window}}(),(()=>{var e;t.g.importScripts&&(e=t.g.location+"");var r=t.g.document;if(!e&&r&&(r.currentScript&&(e=r.currentScript.src),!e)){var c=r.getElementsByTagName("script");c.length&&(e=c[c.length-1].src)}if(!e)throw new Error("Automatic publicPath is not supported in this browser");e=e.replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),t.p=e})(),window.addEventListener("load",(()=>{const t=document.querySelectorAll("ul.nav-tabs > li"),e=t=>{t.preventDefault(),document.querySelector("ul.nav-tabs li.active").classList.remove("active"),document.querySelector(".tab-pane.active").classList.remove("active");const e=t.currentTarget,r=t.target.getAttribute("href");e.classList.add("active"),document.querySelector(r).classList.add("active")};t.forEach((t=>{t.addEventListener("click",e)}))})),(()=>{"use strict";t.p})()})();

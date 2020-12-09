@@ -28,15 +28,15 @@ class AdminCallbacks extends \Inc\Base\BaseController
         return require_once( "$this->plugin_path/templates/cpt-manager-template.php"); 
     }
 
-    public function alleycatOptionsGroup( $input ) 
-    {
-        return $input;
-    }
+    // public function alleycatOptionsGroup( $input ) 
+    // {
+    //     return $input;
+    // }
 
-    public function alleycatAdminSection() 
-    {
-        echo 'Check out this section';
-    }
+    // public function alleycatAdminSection() 
+    // {
+    //     echo 'Check out this section';
+    // }
 
     public function alleycatTextFieldExample() 
     {   

@@ -8,21 +8,25 @@ namespace Inc\Pages;
 use \Inc\Base\BaseController;
 use \Inc\API\SettingsAPI;
 use \Inc\API\Callbacks\AdminCallbacks;
+use \Inc\API\Callbacks\CallbacksManager;
 
 
 class Admin extends BaseController
 
 {
     public $callbacks;
+    public $callbacks_manager;
     public $settings;
     public $pages = array();
-    public $subpages = array();  
+    public $subpages = array();
 
     public function register() 
     {
       $this->settings = new SettingsAPI();
 
       $this->callbacks = new AdminCallbacks();
+
+      $this->callbacks_manager = new CallbacksManager();
       
       $this->setPages();
       
@@ -32,7 +36,7 @@ class Admin extends BaseController
 
       $this->setSections();
 
-      $this->setFields();
+      $this->setFields();  
 
       $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages)->register(); 
     }
@@ -84,19 +88,24 @@ class Admin extends BaseController
 
     public function setSettings()
     {
-      $args = [
-        [
-          'option_group' => 'alleycat_options_group',
-          'option_name' => 'text_example',
-          'callback' => array( $this->callbacks, 'alleycatOptionsGroup')
-        ],
-        [
-          'option_group' => 'alleycat_options_group',
-          'option_name' => 'first_name',          
-        ]
-      ];
 
-      $this->settings->setSettings( $args );
+      $option_list = [
+        [
+          'option_group' => 'alleycat_plugin_settings',
+          'option_name' => 'alleycat_plugin',
+          'callback' => [$this->callbacks_manager, 'checkboxSanitize']
+        ]
+      ];      
+
+      // foreach ( $this->admin_options as $option ) {
+      //   array_push( $option_list, [
+      //     'option_group' => 'alleycat_plugin_settings',
+      //     'option_name' => $option["id"],
+      //     'callback' => [$this->callbacks_manager, 'checkboxSanitize']
+      //   ]);
+      // }    
+
+      $this->settings->setSettings( $option_list );
     }
 
     public function setSections()
@@ -104,8 +113,8 @@ class Admin extends BaseController
       $args = [
         [
           'id' => 'alleycat_admin_index',
-          'title' => 'Settings',
-          'callback' => array( $this->callbacks, 'alleycatAdminSection'),
+          'title' => 'Settings Manager',
+          'callback' => array( $this->callbacks_manager,  'adminSectionManager'),
           'page' => 'alleycat_plugin'
         ]
       ];
@@ -115,33 +124,25 @@ class Admin extends BaseController
 
     public function setFields()
     {
-      $args = [
-        [
-          'id' => 'text_example',
-          'title' => 'Text Example',
-          'callback' => array( $this->callbacks, 'alleycatTextFieldExample'),
-          'page' => 'alleycat_plugin',
-          'section' => 'alleycat_admin_index',
-          'args' => [
-            'label_for' => 'text_example',
-            'class' => 'example-class'
-          ]
-          ],
-          [
-            'id' => 'first_name',
-            'title' => 'First Name',
-            'callback' => array( $this->callbacks, 'alleycatFirstName'),
+      $fields_list = [];
+
+      foreach ( $this->admin_options as $options) {
+        array_push( $fields_list, [          
+            'id' => $options["id"],
+            'title' => $options["title"],
+            'callback' => array( $this->callbacks_manager, 'checkboxField'),
             'page' => 'alleycat_plugin',
             'section' => 'alleycat_admin_index',
             'args' => [
-              'label_for' => 'first_name',
-              'class' => 'example-class'
-            ]
-          ]
-    
-      ];
+              'option_name' => 'alleycat_plugin',
+              'label_for' => $options["id"],
+              'class' => 'ui-toggle'            
+            ]          
+        ]);
+      }
+     
 
-      $this->settings->setFields( $args );
+      $this->settings->setFields( $fields_list );
     }
 }
 

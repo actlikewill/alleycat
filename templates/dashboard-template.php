@@ -14,7 +14,7 @@
 
             <form method="post" action="options.php">
             <?php 
-                settings_fields('alleycat_options_group');
+                settings_fields('alleycat_plugin_settings');
                 do_settings_sections( 'alleycat_plugin' );
                 submit_button();
             ?>
