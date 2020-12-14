@@ -16,9 +16,11 @@
     public static function get_services() 
     {
         return [
-            Pages\Admin::class,
+            Pages\Dashboard::class,            
+            Base\Enqueue::class,
             Base\SettingsLinks::class,
-            Base\Enqueue::class
+            Base\CustomPostTypeController::class,
+            Base\TaxonomyManagerController::class
         ];
     }
 

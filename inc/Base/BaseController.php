@@ -61,4 +61,28 @@ class BaseController
           ];
        
     }
+
+    public function activated ( $value ) {
+
+      $option = get_option( 'alleycat_plugin' );
+
+      $activated = isset($option[$value]) ? $option[$value] : false;
+
+      return $activated;
+    }
+
+    function var_dump_pre($mixed = null) {
+      echo '<pre style="margin-left: 15rem">';
+      var_dump($mixed);
+      echo '</pre>';
+      return null;
+    }
+
+    function var_dump_ret($mixed = null) {
+      ob_start();
+      var_dump($mixed);
+      $content = ob_get_contents();
+      ob_end_clean();
+      return $content;
+    }
 }

@@ -11,14 +11,14 @@ use \Inc\API\Callbacks\AdminCallbacks;
 use \Inc\API\Callbacks\CallbacksManager;
 
 
-class Admin extends BaseController
+class Dashboard extends BaseController
 
 {
     public $callbacks;
     public $callbacks_manager;
     public $settings;
     public $pages = array();
-    public $subpages = array();
+    // public $subpages = array();
 
     public function register() 
     {
@@ -28,17 +28,15 @@ class Admin extends BaseController
 
       $this->callbacks_manager = new CallbacksManager();
       
-      $this->setPages();
-      
-      $this->setSubPages();
+      $this->setPages();    
       
       $this->setSettings();
 
       $this->setSections();
 
-      $this->setFields();  
+      $this->setFields();      
 
-      $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages)->register(); 
+      $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->register(); 
     }
     
     public function setPages() 
@@ -54,37 +52,7 @@ class Admin extends BaseController
           'position' => 110
         ]
       ];
-    }
-
-    public function setSubPages()
-    {
-      $this->subpages = [
-        [
-          'parent_slug' => 'alleycat_plugin',
-          'page_title' => 'Custom Post Types',
-          'menu_title' => 'CPT Manager',
-          'capability' => 'manage_options',
-          'menu_slug' => 'alleycat_cpt',
-          'callback' => array( $this->callbacks, 'cptManager' )         
-        ],
-        [
-          'parent_slug' => 'alleycat_plugin',
-          'page_title' => 'Custom Taxonomies',
-          'menu_title' => 'Taxonomies',
-          'capability' => 'manage_options',
-          'menu_slug' => 'alleycat_taxonomies',
-          'callback' => array( $this->callbacks, 'taxonomyManager' )          
-        ],
-        [
-          'parent_slug' => 'alleycat_plugin',
-          'page_title' => 'Custom Widgets',
-          'menu_title' => 'Widgets',
-          'capability' => 'manage_options',
-          'menu_slug' => 'alleycat_widgets',
-          'callback' => array( $this->callbacks, 'widgetManager' )          
-        ]
-      ];
-    }
+    }  
 
     public function setSettings()
     {
@@ -96,14 +64,6 @@ class Admin extends BaseController
           'callback' => [$this->callbacks_manager, 'checkboxSanitize']
         ]
       ];      
-
-      // foreach ( $this->admin_options as $option ) {
-      //   array_push( $option_list, [
-      //     'option_group' => 'alleycat_plugin_settings',
-      //     'option_name' => $option["id"],
-      //     'callback' => [$this->callbacks_manager, 'checkboxSanitize']
-      //   ]);
-      // }    
 
       $this->settings->setSettings( $option_list );
     }

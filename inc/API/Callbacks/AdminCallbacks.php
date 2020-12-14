@@ -6,7 +6,7 @@
 namespace Inc\API\Callbacks;
 
 class AdminCallbacks extends \Inc\Base\BaseController 
-{
+{    
 
     public function adminDashboard()
     {
@@ -24,19 +24,9 @@ class AdminCallbacks extends \Inc\Base\BaseController
     }
 
     public function cptManager()
-    {
+    {        
         return require_once( "$this->plugin_path/templates/cpt-manager-template.php"); 
-    }
-
-    // public function alleycatOptionsGroup( $input ) 
-    // {
-    //     return $input;
-    // }
-
-    // public function alleycatAdminSection() 
-    // {
-    //     echo 'Check out this section';
-    // }
+    }    
 
     public function alleycatTextFieldExample() 
     {   
