@@ -106,9 +106,9 @@ class CustomPostTypeController extends BaseManagerController
 
 	public function setCustomPostTypes()
 	{
-		$option = get_option('alleycat_plugin_cpt');
+		$options = get_option('alleycat_plugin_cpt');
 
-		// foreach( $options as $option ) {
+		foreach( $options as $option ) {
 				$this->custom_post_types[] = array(
 				'post_type'             => $option['post_type'],
 				'name'                  => $option['plural_name'],
@@ -155,7 +155,7 @@ class CustomPostTypeController extends BaseManagerController
 				'publicly_queryable'    => true,
 				'capability_type'       => 'post'
 			);
-		// }
+		}
 	}
 
 	public function setSettings()
