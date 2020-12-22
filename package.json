@@ -1,0 +1,29 @@
+{
+  "name": "alleycat",
+  "version": "1.0.0",
+  "description": "AlleyCat Wordpress Plugin",
+  "private": true,
+  "scripts": {
+    "start": "webpack --config webpack.config.js --watch",
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/actlikewill/alleycat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/actlikewill/alleycat/issues"
+  },
+  "homepage": "https://github.com/actlikewill/alleycat#readme",
+  "dependencies": {
+    "code-prettify": "^0.1.0",
+    "file-loader": "^6.2.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
