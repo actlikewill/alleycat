@@ -1,4 +1,7 @@
+import 'code-prettify';
+
 window.addEventListener( "load",  () => {  
+    PR.prettyPrint();
     const tabs = document.querySelectorAll("ul.nav-tabs > li");
     const setListener = (tab) => {tab.addEventListener("click", switchTab)};
     const switchTab = (event) => {

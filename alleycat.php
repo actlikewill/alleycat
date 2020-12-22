@@ -34,7 +34,7 @@ function deactivate_alleycat() {
   Inc\Base\Deactivate::deactivate();
 }
 
-if ( class_exists( 'Inc\\init') ) {
+if ( class_exists( 'Inc\\Init') ) {
   Inc\Init::register_services();
 }
 

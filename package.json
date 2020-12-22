@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/actlikewill/alleycat#readme",
   "dependencies": {
+    "code-prettify": "^0.1.0",
     "file-loader": "^6.2.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.0",
