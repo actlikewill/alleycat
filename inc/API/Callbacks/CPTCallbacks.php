@@ -47,7 +47,7 @@ class CPTCallbacks
     public function textField( $args )
     {   
         $name = $args['label_for'];
-        $class = $args['class'];
+        // $class = $args['class'];
         $option_name = $args['option_name'];
         $value = '';
         
