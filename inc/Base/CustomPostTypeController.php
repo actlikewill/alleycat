@@ -13,23 +13,21 @@ class CustomPostTypeController extends BaseManagerController
 {   
 	public $custom_post_types = [];
 	
-      public function __construct() {
+	public function __construct() {
+
+	$this->set_manager_name('cpt_manager');	
+	
+	$this->setSubpages(
+		[
+			'page_title' => 'Custom Post Types',
+			'menu_title' => 'CPT Manager',
+			'menu_slug' => 'alleycat_cpt',
+			'callback' => 'cptManager'
+		]
+	); }	
   
-		$this->set_manager_name('cpt_manager');	
-		
-		$this->setSubpages(
-			[
-				'page_title' => 'Custom Post Types',
-				'menu_title' => 'CPT Manager',
-				'menu_slug' => 'alleycat_cpt',
-				'callback' => 'cptManager'
-			]
-		); }	
-  
-      public function activate()
-      {
-		  
-		
+	public function initialize()
+	{
 		  $this->cpt_callbacks = new CPTCallbacks();
 		  
 		  $this->setSettings();
@@ -37,17 +35,19 @@ class CustomPostTypeController extends BaseManagerController
 		  $this->setSections();
 		  
 		  $this->setFields(); 
-		  
-		  $this->setCustomPostTypes();
-		  
-		  if ( ! empty( $this->custom_post_types ) ) 
-		  {
-			  add_action('init', [$this, 'registerCustomPostTypes']);
-			};
-			
-               
-	  } 
-	  
+	} 
+		
+		
+	public function activate() 
+	{
+		$this->setCustomPostTypes();
+		
+		if ( ! empty( $this->custom_post_types ) ) 
+		{
+			add_action('init', [$this, 'registerCustomPostTypes']);
+		};
+	}
+
 	public function registerCustomPostTypes()
 	{
 		foreach ( $this->custom_post_types as $post_type ) 

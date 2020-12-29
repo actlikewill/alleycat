@@ -26,10 +26,13 @@ class BaseManagerController extends BaseController
 
         $this->settings = new SettingsAPI();                 
 
-        $this->activate();
+        $this->initialize();
         
         $this->settings->addSubPages( $this->subpages )->register(); 
 
+        if (method_exists($this, 'activate')) {
+          $this->activate();
+        }
 
     }
 

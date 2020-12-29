@@ -20,5 +20,10 @@ class Activate
         if( ! get_option('alleycat_plugin_cpt')){
             update_option('alleycat_plugin_cpt', $default);
         }
+
+
+        if( ! get_option('alleycat_plugin_taxonomy')){
+            update_option('alleycat_plugin_taxonomy', $default);
+        }
     }
 }
