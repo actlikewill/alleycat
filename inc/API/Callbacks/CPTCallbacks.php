@@ -38,16 +38,18 @@ class CPTCallbacks
         }
     }
         
-    public function var_dump_pre($mixed = null) {
+    public function var_dump_pre($mixed = null) 
+    {
         echo '<pre style="margin-left: 15rem">';
         var_dump($mixed);
         echo '</pre>';
         return null;
-        }   
+    }
+
     public function textField( $args )
     {   
         $name = $args['label_for'];
-        $class = $args['class'];
+        // $class = $args['class'];
         $option_name = $args['option_name'];
         $value = '';
         
@@ -71,4 +73,6 @@ class CPTCallbacks
         }
         echo '<div class="' . $class . '"><input type="checkbox" id="' .$name . '" name="' . $option_name .'[' . $name .']" value=1 class="" ' . ($checked ? 'checked' : '') . '><label for="' .$name . '"><div></div></label></div>';
     }
+
+    
 }
