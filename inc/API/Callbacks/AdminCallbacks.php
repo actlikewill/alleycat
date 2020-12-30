@@ -13,7 +13,7 @@ class AdminCallbacks extends \Inc\Base\BaseController
         return require_once( "$this->plugin_path/templates/dashboard-template.php"); 
     }
 
-    public function widgetManager()
+    public function mediaWidgetManager()
     {
         return require_once( "$this->plugin_path/templates/widget-manager-template.php"); 
     }

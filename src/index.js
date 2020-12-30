@@ -16,3 +16,25 @@ window.addEventListener( "load",  () => {
             };
     tabs.forEach(setListener);    
 }); 
+
+jQuery(document).ready(($) => {
+    $(document).on('click', '.js-image-upload', (e) => {
+        e.preventDefault();
+        const $button = $(this);
+        const file_frame = wp.media.frames.file_frame = wp.media({
+            title: 'Select or Upload an Image',
+            library: {
+                type: 'image'
+            },
+            button: {
+                text: 'Select Image'
+            },
+            multiple: false
+        });
+        file_frame.on('select', () => {
+            const attachment = file_frame.state().get('selection').first().toJSON();
+            $button.siblings('.image-upload').val(attachment.url);
+        });
+        file_frame.open();
+    });
+});

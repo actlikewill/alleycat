@@ -20,7 +20,8 @@
             Base\Enqueue::class,
             Base\SettingsLinks::class,
             Base\CustomPostTypeController::class,
-            Base\TaxonomyManagerController::class
+            Base\TaxonomyManagerController::class,
+            Base\MediaWidgetController::class
         ];
     }
 
