@@ -5,19 +5,25 @@
 
 namespace Inc\Base;
 
+use \Inc\API\SettingsAPI;
+use \Inc\Base\BaseController;
 use \Inc\Base\BaseManagerController;
+use \Inc\API\Callbacks\TestimonialCallbacks;
 
 class TestimonyController extends BaseManagerController
-{    
+{   
 
-    public function __construct() {
+	public $bc;
+	
+	public function __construct() {
 
-        $this->set_manager_name('testimonial_manager');        
-        
-    }
-
-    public function initialize()
+		$this->set_manager_name('testimonial_manager');        
+		
+	}
+  public function initialize()
     {
+			$this->callbacks = new TestimonialCallbacks();
+
       add_action( 'init', array( $this, 'testimonial_cpt' ) );
       add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 			add_action( 'save_post', array( $this, 'save_meta_box' ) );
@@ -25,6 +31,40 @@ class TestimonyController extends BaseManagerController
 			add_action( 'manage_testimonial_posts_custom_column', [$this, 'set_custom_columns_data'], 10, 2);
 			add_filter( 'manage_edit-testimonial_sortable_columns', [$this, 'set_custom_columns_sortable', ]);
 		}
+		
+		public function activate()
+		{
+			$this->set_short_code_page();
+			add_shortcode( 'testimonial-form', [$this, 'testimonial_form']);
+		}
+
+		public function testimonial_form()
+		{
+			$path = $this->get_my_plugin_path();
+			$url = $this->get_my_plugin_url();
+			ob_start();
+			require_once("$path/templates/contact-form.php");
+			echo "<script src=\"$url/src/form.js\"></script";
+			return ob_get_clean();
+
+		}
+
+		public function set_short_code_page()
+		{
+			$subpage = [
+					[
+						'parent_slug' => 'edit.php?post_type=testimonial',
+						'page_title' => 'Shortcodes',
+						'menu_title' => 'Shortcodes',
+						'capability' => 'manage_options',
+						'menu_slug' => 'alleycat_testimonial_shortcode',
+						'callback' => [ $this->callbacks, 'shortcodePage']
+					]
+				];
+				$this->settings->addSubPages( $subpage )->register();
+		}
+
+
 		
 		public function  add_email_box()
 		{
