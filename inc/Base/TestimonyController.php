@@ -43,6 +43,7 @@ class TestimonyController extends BaseManagerController
 			$path = $this->get_my_plugin_path();
 			$url = $this->get_my_plugin_url();
 			ob_start();
+			echo "<link href=\"$url/assets/form.css\" rel=\"stylesheet\"></link>";
 			require_once("$path/templates/contact-form.php");
 			echo "<script src=\"$url/src/form.js\"></script";
 			return ob_get_clean();

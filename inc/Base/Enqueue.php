@@ -18,7 +18,7 @@ class Enqueue extends \Inc\Base\BaseController
     function enqueue() {              
         wp_enqueue_script( 'media_upload');
         wp_enqueue_media();
-        wp_enqueue_style('AlleyCatStyles', $this->plugin_url . 'assets/styles.css' );
-        wp_enqueue_script('AlleyCatScripts', $this->plugin_url . 'assets/scripts.js' );
+        wp_enqueue_style('AlleyCatStyles', $this->plugin_url . 'assets/admin.css' );
+        wp_enqueue_script('AlleyCatScripts', $this->plugin_url . 'assets/admin.js' );
         }
 }

@@ -1,12 +1,13 @@
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './src/index',
-        './src/styles.scss'
-    ],
+    entry: {
+        'admin': ['./src/admin.js', './src/admin.scss'],
+        'form' : ['./src/form.js', './src/form.scss']
+        
+    },
     output: {
-        filename: 'scripts.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'assets')
     },
     module: {
@@ -19,7 +20,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             outputPath: '/',
-                            name: 'styles.css'
+                            name: '[name].css'
                         }
                     },
                     'sass-loader'
