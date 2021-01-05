@@ -36,6 +36,7 @@ class TestimonyController extends BaseManagerController
 		{
 			$this->set_short_code_page();
 			add_shortcode( 'testimonial-form', [$this, 'testimonial_form']);
+			add_shortcode( 'testimonial-slideshow', [$this, 'testimonial_slideshow']);
 			add_action( 'wp_ajax_submit_testimonial', [$this, 'submit_testimonial']);
 			add_action( 'wp_ajax_nopriv_submit_testimonial', [$this, 'submit_testimonial']);
 		}
@@ -92,6 +93,18 @@ class TestimonyController extends BaseManagerController
 			echo "<link href=\"$url/assets/form.css\" rel=\"stylesheet\"></link>";
 			require_once("$path/templates/contact-form.php");
 			echo "<script src=\"$url/src/form.js\"></script";
+			return ob_get_clean();
+
+		}
+
+		public function testimonial_slideshow()
+		{
+			$path = $this->get_my_plugin_path();
+			$url = $this->get_my_plugin_url();
+			ob_start();
+			echo "<link href=\"$url/assets/slider.css\" rel=\"stylesheet\"></link>";
+			require_once("$path/templates/slider.php");
+			echo "<script src=\"$url/src/slider.js\"></script";
 			return ob_get_clean();
 
 		}
