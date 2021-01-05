@@ -44,7 +44,7 @@ class BaseController
             ],
             [
              'id' => 'template_manager',
-              'title' => 'Activate Taxonomy Manager'
+              'title' => 'Activate Custom Template Manager'
             ],
             [
               'id' => 'login_manager',
@@ -71,6 +71,15 @@ class BaseController
       return $activated;
     }
 
+    public function get_my_plugin_path()
+    {
+      return plugin_dir_path( dirname( __FILE__, 2 ) );
+    }
+
+    public function get_my_plugin_url()
+    {
+      return plugin_dir_url( dirname( __FILE__, 2 ) );
+    }
     function var_dump_pre($mixed = null) {
       echo '<pre style="margin-left: 15rem">';
       var_dump($mixed);

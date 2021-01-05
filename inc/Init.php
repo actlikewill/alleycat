@@ -21,7 +21,9 @@
             Base\SettingsLinks::class,
             Base\CustomPostTypeController::class,
             Base\TaxonomyManagerController::class,
-            Base\MediaWidgetController::class
+            Base\MediaWidgetController::class,
+            Base\TestimonyController::class,
+            Base\TemplateManagerController::class,
         ];
     }
 
