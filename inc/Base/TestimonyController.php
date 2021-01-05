@@ -39,9 +39,22 @@ class TestimonyController extends BaseManagerController
 			add_action( 'wp_ajax_submit_testimonial', [$this, 'submit_testimonial']);
 			add_action( 'wp_ajax_nopriv_submit_testimonial', [$this, 'submit_testimonial']);
 		}
+		
+		public function return_json($status)
+		{
+			$return = [
+					'status' => $status,
+				];
+				wp_send_json($return);
+				wp_die();
+		}
 
 		public function submit_testimonial()
 		{
+			if ( ! DOING_AJAX || ! check_ajax_referer('testimonial-nonce', 'nonce') ) {
+				return $this->return_json('error');
+			}
+
 			$name = sanitize_text_field($_POST['name']);
 			$email = sanitize_email($_POST['email']);
 			$message = sanitize_textarea_field($_POST['message']);
@@ -65,22 +78,10 @@ class TestimonyController extends BaseManagerController
 			$postID = wp_insert_post($args);
 
 			if( $postID ) {
-				$return = [
-					'status' => 'success',
-					'ID' => $postID
-				];
+				return $this->return_json('success');
+			} 
 
-				wp_send_json($return);
-				wp_die();
-			}
-
-			$return = [
-				'status' => 'error'
-			];
-			
-			wp_send_json($return);
-
-			wp_die();
+			return $this->return_json('error');
 		}
 
 		public function testimonial_form()
