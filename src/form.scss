@@ -1,3 +1,46 @@
-.form {
-  background: #000;
+#alleycat-testimonial-form {
+  .field-container {
+    position: relative;
+    margin-bottom: 20px;
+     input, textarea{
+       min-width: 100%;
+       max-width: 100%;
+     }
+  }
+  .field-msg {
+    display:none;
+    position: absolute;
+    left: 4px;
+    bottom: -16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+      &.show {
+      display: block;
+    }
+  }
+  .error {
+    color: red;
+  }
+  .success {
+    color: green;
+  }
+
+  
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    height: 3rem;
+    background: #181818;    
+    color: rgb(182, 180, 180);
+    text-transform: uppercase;
+    border: none;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    transition: .21s ease;
+    &:hover {
+      background: #000000;
+      color: white;
+    }
+  }
 }

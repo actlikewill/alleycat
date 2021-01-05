@@ -36,6 +36,51 @@ class TestimonyController extends BaseManagerController
 		{
 			$this->set_short_code_page();
 			add_shortcode( 'testimonial-form', [$this, 'testimonial_form']);
+			add_action( 'wp_ajax_submit_testimonial', [$this, 'submit_testimonial']);
+			add_action( 'wp_ajax_nopriv_submit_testimonial', [$this, 'submit_testimonial']);
+		}
+
+		public function submit_testimonial()
+		{
+			$name = sanitize_text_field($_POST['name']);
+			$email = sanitize_email($_POST['email']);
+			$message = sanitize_textarea_field($_POST['message']);
+
+		$data = array(
+			'name' => $name,
+			'email' => $email,
+			'approved' => 0,
+			'featured' => 0,
+		);
+		$args = [
+			'post_title' => 'Testimonial from ' . $name,
+			'post_content' => $message, 
+			'post_author' => 1,
+			'post_status' => 'publish',
+			'post_type' => 'testimonial',
+			'meta_input' => [
+				'_alleycat_testimonial_key' => $data
+			]
+		];
+			$postID = wp_insert_post($args);
+
+			if( $postID ) {
+				$return = [
+					'status' => 'success',
+					'ID' => $postID
+				];
+
+				wp_send_json($return);
+				wp_die();
+			}
+
+			$return = [
+				'status' => 'error'
+			];
+			
+			wp_send_json($return);
+
+			wp_die();
 		}
 
 		public function testimonial_form()
@@ -175,7 +220,7 @@ public function save_meta_box($post_id)
 
 		$data = array(
 			'name' => sanitize_text_field( $_POST['alleycat_testimonial_author'] ),
-			'email' => sanitize_text_field( $_POST['alleycat_testimonial_email'] ),
+			'email' => sanitize_email( $_POST['alleycat_testimonial_email'] ),
 			'approved' => isset($_POST['alleycat_testimonial_approved']) ? 1 : 0,
 			'featured' => isset($_POST['alleycat_testimonial_featured']) ? 1 : 0,
 		);
