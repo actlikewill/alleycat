@@ -44,7 +44,7 @@ class BaseController
             ],
             [
              'id' => 'template_manager',
-              'title' => 'Activate Taxonomy Manager'
+              'title' => 'Activate Custom Template Manager'
             ],
             [
               'id' => 'login_manager',
